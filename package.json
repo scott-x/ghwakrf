@@ -1,6 +1,6 @@
 {
   "name": "ghwakrf",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "bin": {
     "case": "./bin/index.js"
