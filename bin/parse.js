@@ -8,6 +8,11 @@ module.exports={
        const workSheetsFromFile = xlsx.parse(excle_path);
        const job_data=workSheetsFromFile[0].data
        var index = job_data[4].toString().indexOf("Program");
+       var supplier=job_data[5].toString().replace(/找去年更新/g,'').replace(/,/g,'');
+       if (supplier.substring(0,1)!=="S") {
+         var num = supplier.indexOf("Supplier")
+         supplier = supplier.substring(num)
+       }
        var obj={
        	job:job_data[1][1],
        	create_date:job_data[4][0],
@@ -15,7 +20,7 @@ module.exports={
        	text:job_data[4][1],
        	additional_notes:job_data[5][1],
        	program:job_data[4].toString().substring(index),
-       	supplier:job_data[5].toString().replace(/找去年更新/g,'').replace(/,/g,''),
+       	supplier:supplier,
        	buyer:job_data[6].toString().replace(/,/g,''),
        	due_date:job_data[7].toString().replace(/,/g,''),
        	packout_date:job_data[8].toString().replace(/,/g,''),
@@ -24,8 +29,6 @@ module.exports={
            status:job_data[11].toString().replace(/,/g,''),
            contact:job_data[12].toString().replace(/,/g,'')
        }
-
-       // console.log(obj)
        return new Promise((resolve)=>{
             resolve(obj)
        })
