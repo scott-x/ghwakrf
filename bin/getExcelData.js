@@ -16,7 +16,7 @@ module.exports={
                   {
                     type: 'input',
                     name: 'type',
-                    message: `${chalk.magenta('请输入工单号(纯数字):')}`
+                    message: `${chalk.magenta(' 请输入工单号(纯数字):')}`
                   }
                
               ])
