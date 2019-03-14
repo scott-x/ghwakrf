@@ -12,7 +12,8 @@ module.exports={
 		JobPathModel.remove({},function(err,result){
 			  if (err) return handleError(err);
 		      console.log(result);
-		      console.log("删除完毕")
+		      console.log("  删除完毕")
+		      mongoose.connection.close(); 
 		})
 	}
 }

@@ -1,7 +1,7 @@
 {
   "name": "ghwakrf",
   "version": "1.0.1",
-  "description": "",
+  "description": "1. parse excel, get the obj data 2. get the args: `excel path` 3. store the data(path) into mongodb 4. query data",
   "bin": {
     "caseinfo": "./bin/index.js"
   },
@@ -19,5 +19,15 @@
     "inquirer": "^6.2.2",
     "mongoose": "^5.4.19",
     "node-xlsx": "^0.14.1"
-  }
+  },
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scott-x/ghwakrf.git"
+  },
+  "bugs": {
+    "url": "https://github.com/scott-x/ghwakrf/issues"
+  },
+  "homepage": "https://github.com/scott-x/ghwakrf#readme"
 }

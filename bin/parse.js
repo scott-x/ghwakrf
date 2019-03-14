@@ -5,6 +5,7 @@ var path = require('path')
 // Parse a file
 module.exports={
 	parse:function(excle_path){
+
        const workSheetsFromFile = xlsx.parse(excle_path);
        const job_data=workSheetsFromFile[0].data
        var index = job_data[4].toString().indexOf("Program");
@@ -23,19 +24,27 @@ module.exports={
        if (excle_path.indexOf("已结束")>0) {
          job_status="已结束"
        }
+       var text=job_data[4][1];
+       var buyer=job_data[6].toString().replace(/,/g,'');
+       if (buyer.substring(0,4)!="Buyer") {
+         var index=buyer.indexOf("Buyer")
+         buyer=buyer.substring(index)
+         text+=buyer.substring(0,index-1);
+       }
+       // console.log("job_status",job_status)
        var obj={
        	job:job_data[1][1],
         brand_country: job_data[2][0]+': '+job_data[2][1],
        	create_date:job_data[4][0],
        	author:job_data[2][2]||job_data[2][3],
-       	text:job_data[4][1],
+       	text,
        	additional_notes:job_data[5][1],
        	program:job_data[4].toString().substring(index),
        	supplier:supplier,
-       	buyer:job_data[6].toString().replace(/,/g,''),
+       	buyer,
        	due_date:job_data[7].toString().replace(/,/g,''),
        	packout_date:job_data[8].toString().replace(/,/g,''),
-        job_status:job_status,
+        job_status,
        	ship_date:job_data[9].toString().replace(/,/g,''),
            instore_date:job_data[10].toString().replace(/,/g,''),
            status:job_data[11].toString().replace(/,/g,''),

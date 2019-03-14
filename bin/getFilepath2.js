@@ -2,7 +2,7 @@ var fs = require("fs");
 var parse = require('./parse').parse;
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var jobPathSchema = new Schema({ job_number: String,path:String,status:String,create_time:Date});
+var jobPathSchema = new Schema({ job_number: String,path:String,create_time:Date});
 var JobPathModel = mongoose.model('benchmark_job_path', jobPathSchema); //创建blog数据库
 mongoose.connect('mongodb://localhost:27017/benchmark_job_path',{ useNewUrlParser: true } );
 
@@ -45,12 +45,13 @@ function readDir(path){
                         var newJobPath = new JobPathModel({
                               job_number:ele,
                               path:newPath,
-                              status:status,
+                              // status:status,
                               create_time:new Date().getTime()
                            })
                            newJobPath.save(function(err,docs){
                              if (err) {console.log('err')}
                               console.log(docs) // 
+                              // mongoose.connection.close(); //位置不对，2500多天只有6条数据进去了
                            })
                         
                         
