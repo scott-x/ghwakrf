@@ -32,7 +32,7 @@ var inquirer = require('inquirer');
                     require('./getExcelData').getData()
                    break;
                 case  'update the data in database':
-                    const folder = "/Volumes/datavolumn_bmkserver_Pub/新做稿/未开始";
+                    const folder = "/Volumes/datavolumn_bmkserver_Pub/新做稿";
                     require('./getFilepath2').readDir(folder)
 
                    break;

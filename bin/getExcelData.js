@@ -16,7 +16,7 @@ module.exports={
                   {
                     type: 'input',
                     name: 'type',
-                    message: `${chalk.magenta(' 请输入工单号(纯数字):')}`
+                    message: `${chalk.magenta(' 请输入关键字(公司名或者单号里的某个数字,eg: gem 22):')}`
                   }
                
               ])
@@ -29,11 +29,12 @@ module.exports={
                      docs.forEach(item=>{
                        
                        // console.log("---------------------------------------------")
-                       
+                        
                             parse(item.path).then(data=>{
+
                               console.log("")
                               console.log(`${chalk.green(data.job)}`)
-                              console.log(`${chalk.green(data.create_date)}`)
+                              console.log(`${chalk.green(data.brand_country)}`)
                               console.log(`${chalk.green(data.author)}`)
                               console.log(`${chalk.green(data.text)}`)
                               console.log(`${chalk.green('日期:'+data.create_date)}`)
@@ -53,6 +54,16 @@ module.exports={
                               console.log(`${chalk.blue(data.status)}`)
                               
                               console.log(`${chalk.green(data.contact)}`)
+                              if (data.job_status=="已结束") {
+                                console.log(`工单状态：${chalk.red.bold(data.job_status)}`)
+                              }
+                              if (data.job_status=="进行中") {
+                                console.log(`工单状态：${chalk.green.bold(data.job_status)}`)
+                              }
+                              if (data.job_status=="未开始") {
+                                console.log(`工单状态：${chalk.bold(data.job_status)}`)
+                              }
+                              
                               console.log("")
                               console.log("-------------------------------------------")
                             }).catch(err=>{

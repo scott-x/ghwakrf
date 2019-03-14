@@ -13,8 +13,19 @@ module.exports={
          var num = supplier.indexOf("Supplier")
          supplier = supplier.substring(num)
        }
+       var job_status;
+       if (excle_path.indexOf("未开始")>0) {
+         job_status="未开始..."
+       }
+        if (excle_path.indexOf("进行中")>0) {
+         job_status="进行中..."
+       }
+       if (excle_path.indexOf("已结束")>0) {
+         job_status="已结束"
+       }
        var obj={
        	job:job_data[1][1],
+        brand_country: job_data[2][0]+': '+job_data[2][1],
        	create_date:job_data[4][0],
        	author:job_data[2][2]||job_data[2][3],
        	text:job_data[4][1],
@@ -24,11 +35,13 @@ module.exports={
        	buyer:job_data[6].toString().replace(/,/g,''),
        	due_date:job_data[7].toString().replace(/,/g,''),
        	packout_date:job_data[8].toString().replace(/,/g,''),
+        job_status:job_status,
        	ship_date:job_data[9].toString().replace(/,/g,''),
            instore_date:job_data[10].toString().replace(/,/g,''),
            status:job_data[11].toString().replace(/,/g,''),
            contact:job_data[12].toString().replace(/,/g,'')
        }
+
        return new Promise((resolve)=>{
             resolve(obj)
        })

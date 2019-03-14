@@ -2,7 +2,7 @@ var fs = require("fs");
 var parse = require('./parse').parse;
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var jobPathSchema = new Schema({ job_number: String,path:String,create_time:Date});
+var jobPathSchema = new Schema({ job_number: String,path:String,status:String,create_time:Date});
 var JobPathModel = mongoose.model('benchmark_job_path', jobPathSchema); //创建blog数据库
 mongoose.connect('mongodb://localhost:27017/benchmark_job_path',{ useNewUrlParser: true } );
 
@@ -27,6 +27,9 @@ function readDir(path){
             fs.stat(path+"/"+ele,function(err,info){
                 if(info.isDirectory()){
                     // console.log("dir: "+ele)
+                    if (ele=="摄影") {
+                      return
+                    }
                     readDir(path+"/"+ele);
                 }else{
                     // console.log("file: "+ele)
@@ -38,9 +41,11 @@ function readDir(path){
                         var newPath = path+'/'+ele;
                         console.log(newPath)
                         //save path into database
+                        
                         var newJobPath = new JobPathModel({
                               job_number:ele,
                               path:newPath,
+                              status:status,
                               create_time:new Date().getTime()
                            })
                            newJobPath.save(function(err,docs){
@@ -48,7 +53,7 @@ function readDir(path){
                               console.log(docs) // 
                            })
                         
-                        //不会自动创建blog数据库，除非执行路由操作,并影响了行数
+                        
                         
                         // parse(newPath).then(data=>{
                         //     console.log(data)
