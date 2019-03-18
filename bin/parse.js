@@ -31,6 +31,9 @@ module.exports={
          buyer=buyer.substring(index)
          text+=buyer.substring(0,index-1);
        }
+       var program = job_data[4].toString().substring(index);
+       var p_index = program.indexOf("Program")
+       program = program.substring(p_index);
        // console.log("job_status",job_status)
        var obj={
        	job:job_data[1][1],
@@ -39,7 +42,7 @@ module.exports={
        	author:job_data[2][2]||job_data[2][3],
        	text,
        	additional_notes:job_data[5][1],
-       	program:job_data[4].toString().substring(index),
+       	program:program,
        	supplier:supplier,
        	buyer,
        	due_date:job_data[7].toString().replace(/,/g,''),

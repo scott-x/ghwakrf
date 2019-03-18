@@ -1,5 +1,6 @@
 
 module.exports={
+    
   getData:function(){
     var mongoose = require('mongoose');
     var inquirer = require('inquirer');
@@ -33,7 +34,7 @@ module.exports={
     mongoose.connect('mongodb://localhost:27017/benchmark_job_path',{ useNewUrlParser: true } );
     mongoose.connect('mongodb://localhost:27017/benchmark_job_detail',{ useNewUrlParser: true } );
   
-    console.log("   正在更新数据....")
+    console.log("   Updating the job data, it may take a few minutes....")
     JobPathModel.find({},function(err,docs){
        if (err) {console.log('err')}
          // console.log(docs)
@@ -63,7 +64,7 @@ module.exports={
                newJob.save((err,docs)=>{
                    if (err) {console.log(err)}
                       console.log(docs)   
-                      // mongoose.connection.close();  
+                      mongoose.connection.close();  
                })
           })
          })

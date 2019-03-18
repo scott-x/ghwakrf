@@ -20,7 +20,7 @@ var inquirer = require('inquirer');
                 type: 'rawlist',
                 name: 'type',
                 message: `${chalk.magenta(' What do you want to do?')}`,
-                choices: ['query','update detail data','remove detail data','remove job data','update job data'],
+                choices: ['query','remove job data','update job data','remove detail data','update detail data'],
                 default: 'query'
               }
            
@@ -28,13 +28,13 @@ var inquirer = require('inquirer');
           .then(answers => {
             // Use user feedback for... whatever!!
              switch (answers.type){
-                case 'update job data':
+                case 'update detail data':
                     require('./saveExcleData').getData()
                    break;
                 case 'remove detail data':
                     require('./removeAllData').removeAllData()
                    break;   
-                case  'update detail data':
+                case  'update job data':
                     const folder = "/Volumes/datavolumn_bmkserver_Pub/新做稿";
                     require('./getFilepath2').readDir(folder)
                    break;
