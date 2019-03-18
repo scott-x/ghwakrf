@@ -31,14 +31,14 @@ var inquirer = require('inquirer');
                 case 'update detail info':
                     require('./saveExcleData').getData()
                    break;
-                case 'remove detail info':
+                case 'remove detail data':
                     require('./removeAllData').removeAllData()
                    break;   
-                case  'update the job data in database':
+                case  'update detail data':
                     const folder = "/Volumes/datavolumn_bmkserver_Pub/新做稿";
                     require('./getFilepath2').readDir(folder)
                    break;
-                case 'remove data':
+                case 'remove job data':
                     require('./removeData').removeData()
                    break; 
                 case 'query':
