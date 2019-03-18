@@ -20,7 +20,7 @@ var inquirer = require('inquirer');
                 type: 'rawlist',
                 name: 'type',
                 message: `${chalk.magenta(' What do you want to do?')}`,
-                choices: ['query','update detail info','remove data','update the job data in database'],
+                choices: ['query','update detail data','remove detail data','remove job data','update job data'],
                 default: 'query'
               }
            
@@ -31,10 +31,12 @@ var inquirer = require('inquirer');
                 case 'update detail info':
                     require('./saveExcleData').getData()
                    break;
+                case 'remove detail info':
+                    require('./removeAllData').removeAllData()
+                   break;   
                 case  'update the job data in database':
                     const folder = "/Volumes/datavolumn_bmkserver_Pub/新做稿";
                     require('./getFilepath2').readDir(folder)
-
                    break;
                 case 'remove data':
                     require('./removeData').removeData()
