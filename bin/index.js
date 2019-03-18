@@ -28,7 +28,7 @@ var inquirer = require('inquirer');
           .then(answers => {
             // Use user feedback for... whatever!!
              switch (answers.type){
-                case 'update detail info':
+                case 'update job data':
                     require('./saveExcleData').getData()
                    break;
                 case 'remove detail data':
