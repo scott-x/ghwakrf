@@ -48,7 +48,7 @@ module.exports.query=function(){
 	              console.log(`${chalk.green(data.brand_country)}`)
 	              console.log(`${chalk.green(data.author)}`)
 	              console.log(`${chalk.green(data.text)}`)
-	              console.log(`${chalk.green('日期:'+data.create_date)}`)
+	              console.log(`${chalk.green('日期:'+data.create_time)}`)
 	              
 	              
 	              if (data.additional_notes) {
