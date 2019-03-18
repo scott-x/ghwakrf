@@ -1,58 +1,68 @@
-var fs = require("fs")
+var fs = require("fs");
+var parse = require('./parse').parse;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var jobPathSchema = new Schema({ job_number: String,path:String,create_time:Date});
+var JobPathModel = mongoose.model('benchmark_job_path', jobPathSchema); //创建blog数据库
+mongoose.connect('mongodb://localhost:27017/benchmark_job_path',{ useNewUrlParser: true } );
 
-var excel_path;
-
-module.exports={
-	readDir: function(folder){
-        fs.readdir(folder,function(err,menu){	
-        	if(!menu)
-        		return;
-        	menu.forEach(function(ele){	
-        		fs.stat(folder+"/"+ele,function(err,info){
-        			if(info.isDirectory()){
-        				if (/做稿/.test(ele)) {
-        					// console.log("dir: "+ele)
-                            var pure_number = ele.substring(0,11);
-                            var eles=pure_number+'\ 做稿';
-                            
-        					switch (ele.substring(0,1)){
-        						case 'B':
-        						case 'U':
-        						case 'C':
-        						  excel_path= folder+eles+'/'+pure_number+'_DetailList_W.xls';
-        						  fs.exists(excel_path, function(exists) {
-        						  	if (exists) {
-        						  		require('./parse').parse(excel_path)
-        						  	}else{
-        						  	    excel_path=folder+eles+'/'+pure_number+'_DetailList_W.xls'+'x';
-        						  	    require('./parse').parse(excel_path)
-        						  	}
-        						  });
-        						  
-        						  break;  
-        						case 'P':
-        						  ele=pure_number+'\ 做稿';
-        						  excel_path='/Volumes/datavolumn_bmkserver_Pub/新做稿/印刷/' +eles+'/'+pure_number+'_DetailList_W.xls';
-        						  exists(excel_path);
-        						  require('./parse').parse(excel_path)
-        						  break;       
-        					}
-        					
-        				}
-        			}
-        		})
-        	})			
-        })
-	}
+function parsePath(filePath){
+   var index = filePath.indexOf(' ');
+   while(index>-1){
+      filePath = filePath.substring(0,index)+'\\'+filePath.substring(index);
+      index = filePath.indexOf(' ',index+2);
+   }
+   return filePath;
 }
 
+function readDir(path){
+    // JobPathModel.remove({},function(err,result){
+    //     if (err) return handleError(err);
+    //       console.log("清库中。。。。")
+    // })
+    fs.readdir(path,function(err,menu){    
+        if(!menu)
+            return;
+        menu.forEach(function(ele){    
+            fs.stat(path+"/"+ele,function(err,info){
+                if(info.isDirectory()){
+                    // console.log("dir: "+ele)
+                    if (ele=="摄影") {
+                      return
+                    }
+                    readDir(path+"/"+ele);
+                }else{
+                    // console.log("file: "+ele)
+                    const patt=/DetailList_W/g
+                    const result = patt.test(ele) && ele.substring(0,1)!=='.' && ele.substring(0,1)!=='~';
+                    if (result) {
+                        
+                        // var newPath = parsePath(path)+'/'+ele;
+                        var newPath = path+'/'+ele;
+                        console.log(newPath)
+                        //save path into database
+                        
+                        var newJobPath = new JobPathModel({
+                              job_number:ele,
+                              path:newPath,
+                              // status:status,
+                              create_time:new Date().getTime()
+                           })
+                           newJobPath.save(function(err,docs){
+                             if (err) {console.log('err')}
+                              console.log(docs) // 
+                              // mongoose.connection.close(); //位置不对，2500多天只有6条数据进去了
+                           })
+                        
+                    }else{
+                      return
+                    }
+                }    
+            })
+        })            
+    })
+}
 
-function exists(file){
-	fs.exists(file, function(exists) {
-		if (exists) {
-			return
-		}else{
-			return file=file+'x';
-		}
-	});
+module.exports={
+   readDir:readDir
 }

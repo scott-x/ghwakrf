@@ -6,6 +6,7 @@ var parse = require('./parse').parse;
 var Schema = mongoose.Schema;
 var jobPathSchema = new Schema({ job_number: String,path:String,create_time:Date});
 var jobDetailSchema = new Schema({
+ title:String,  	
  job: String,
  brand_country:String,
  author:String,
@@ -44,17 +45,20 @@ module.exports.query=function(){
 	  	    var n=0;
 	  	  	docs.forEach(data=>{
 	  	  		  n++;
+	  	  		  var additional_info = data.title.split("任     务     单")[1];
+	  	  		  if (additional_info) {
+	  	  		  	console.log(`${chalk.green("任     务     单")}${chalk.red(additional_info)}`)
+	  	  		  }else{
+	  	  		  	console.log(`${chalk.green(data.title)}`)
+	  	  		  }
 	              console.log(`${chalk.green(data.job)}`)
 	              console.log(`${chalk.green(data.brand_country)}`)
 	              console.log(`${chalk.green(data.author)}`)
 	              console.log(`${chalk.green(data.text)}`)
-	              console.log(`${chalk.green('日期:'+data.create_time)}`)
-	              
-	              
 	              if (data.additional_notes) {
 	                console.log(`${chalk.bold.red(data.additional_notes)}`)
 	              }
-	              
+	              console.log(`${chalk.green(data.create_time)}`)
 	              console.log(`${chalk.blue(data.program)}`)
 	              console.log(`${chalk.blue(data.supplier)}`)
 	              console.log(`${chalk.blue(data.buyer)}`)

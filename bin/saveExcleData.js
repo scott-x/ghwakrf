@@ -10,6 +10,7 @@ module.exports={
     var Schema = mongoose.Schema;
     var jobPathSchema = new Schema({ job_number: String,path:String,create_time:Date});
     var jobDetailSchema = new Schema({
+     title:String,   
      job: String,
      brand_country:String,
      author:String,
@@ -42,7 +43,8 @@ module.exports={
          docs.forEach(item=>{
           parse(item.path).then(data=>{
               var newJob = new JobDetailModel({
-                    job: data.job,
+                     title:data.title,
+                     job: data.job,
                      brand_country:data.brand_country,
                      author:data.author,
                      text:data.text,

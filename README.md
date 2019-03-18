@@ -8,7 +8,7 @@
 ### useage
 ```
 npm install ghwakrf -g
-case
+caseinfo
 ```
 
 #### mongoose使用总结

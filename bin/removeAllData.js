@@ -4,6 +4,7 @@ var chalk = require('chalk');
 var Schema = mongoose.Schema;
 
 var jobDetailSchema = new Schema({
+ title:String,  	
  job: String,
  brand_country:String,
  author:String,

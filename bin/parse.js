@@ -34,8 +34,11 @@ module.exports={
        var program = job_data[4].toString().substring(index);
        var p_index = program.indexOf("Program")
        program = program.substring(p_index);
+
+       console.log(job_data)
        // console.log("job_status",job_status)
        var obj={
+        title:job_data[0][0],
        	job:job_data[1][1],
         brand_country: job_data[2][0]+': '+job_data[2][1],
        	create_date:job_data[4][0],
@@ -49,9 +52,9 @@ module.exports={
        	packout_date:job_data[8].toString().replace(/,/g,''),
         job_status,
        	ship_date:job_data[9].toString().replace(/,/g,''),
-           instore_date:job_data[10].toString().replace(/,/g,''),
-           status:job_data[11].toString().replace(/,/g,''),
-           contact:job_data[12].toString().replace(/,/g,'')
+        instore_date:job_data[10].toString().replace(/,/g,''),
+        status:job_data[11].toString().replace(/,/g,''),
+        contact:job_data[12].toString().replace(/,/g,'')
        }
 
        return new Promise((resolve)=>{
