@@ -113,7 +113,7 @@ module.exports.query=function(){
 	          inquirer.prompt([{
 		            type: 'input',
 		            name: 'type',
-		            message: `${chalk.magenta(' 请输入邮箱关键字(忽略大小写,如：@salesmarketingservices.com):')}`
+		            message: `${chalk.magenta(' 请输入邮箱关键字(如：scott, @salesmarketingservices.com):')}`
 	          },])
 	          .then(answers=>{
 	                // console.log("type",answers.type)

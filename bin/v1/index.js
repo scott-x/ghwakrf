@@ -3,7 +3,6 @@
 
 var chalk = require('chalk');
 var inquirer = require('inquirer');
-
 inquirer
   .prompt([
     /* Pass your questions in here */
@@ -11,28 +10,17 @@ inquirer
         type: 'rawlist',
         name: 'type',
         message: `${chalk.magenta(' What do you want to do?')}`,
-        choices: ['query','remove job data','update job data','remove detail data','update detail data'],
-        default: 'query'
+        choices: ['数据查询','数据管理'],
+        default: '数据查询'
       }
    
   ])
   .then(answers => {
-    // Use user feedback for... whatever!!
      switch (answers.type){
-        case 'update detail data':
-            require('./saveExcleData').getData()
+        case '数据管理':
+            require('./manageData')()
            break;
-        case 'remove detail data':
-            require('./removeAllData').removeAllData()
-           break;   
-        case  'update job data':
-            const folder = "/Volumes/datavolumn_bmkserver_Pub/新做稿";
-            require('./getFilepath').readDir(folder)
-           break;
-        case 'remove job data':
-            require('./removeData').removeData()
-           break; 
-        default:
+        case "数据查询":
             require('./query').query()
            break;      
      }

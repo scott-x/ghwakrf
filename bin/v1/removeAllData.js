@@ -29,9 +29,9 @@ mongoose.connect('mongodb://localhost:27017/benchmark_job_detail',{ useNewUrlPar
 
 module.exports={
 	removeAllData: function(){
-		JobDetailModel.remove({},function(err,result){
+		JobDetailModel.deleteMany({},function(err,result){
 			  if (err) return handleError(err);
-		      console.log("  删除完毕, 共删除 "+result.n+" 条数据")
+		      console.log("   删除完毕, 共删除 "+result.n+" 条数据")
 		      mongoose.connection.close(); 
 		})
 	}

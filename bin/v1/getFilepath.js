@@ -50,7 +50,7 @@ function readDir(path){
                            })
                            newJobPath.save(function(err,docs){
                              if (err) {console.log('err')}
-                              // console.log(docs) // 
+                              console.log("   "+Date.now()+docs._id+Math.ceil(Math.random()*9)) // 
                               // mongoose.connection.close(); //位置不对，2500多天只有6条数据进去了
                            })
                         
