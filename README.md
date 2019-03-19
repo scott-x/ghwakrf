@@ -6,8 +6,23 @@
 
 
 ### useage
+#### option 1
 ```
-npm install ghwakrf -g
+npm install ghwakrf -g  
+brew install mongodb-community@3.4
+mongod --config /usr/local/etc/mongod.conf
+```
+#### option 2
+```
+cd
+git clone https://github.com/scott-x/ghwakrf.git
+cd ghwakrf
+npm link
+brew install mongodb-community@3.4
+mongod --config /usr/local/etc/mongod.conf
+```
+#### run in anywhere of your terminal
+```
 caseinfo
 ```
 
