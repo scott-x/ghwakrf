@@ -1,11 +1,10 @@
-### step
+### Develop Step
 1. parse excel, get the obj data
 2. get the args: `excel path`
 3. store the data(path) into mongodb
 4. query data
 
-
-### useage for MacOS
+### Useage For MacOS
 #### option 1
 ```
 npm install ghwakrf -g  
@@ -25,7 +24,7 @@ mongod --config /usr/local/etc/mongod.conf
 ```
 caseinfo
 ```
-### 效果展示
+### visual
 ![](./imgs/1.png)
 
 #### mongoose使用总结
