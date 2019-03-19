@@ -32,7 +32,7 @@ inquirer
         case 'remove job data':
             require('./removeData').removeData()
            break; 
-        case 'query':
+        default:
             require('./query').query()
            break;      
      }

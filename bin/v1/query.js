@@ -75,7 +75,7 @@ module.exports.query=function(){
             type: 'rawlist',
             name: 'query',
             message: `${chalk.magenta(' 选择你的查询方式:')}`,
-            choices: ['按工单号查询',"按系列,国家查询"],
+            choices: ['按工单号查询',"按系列,国家查询","按客人邮件查询","按做稿时间查询","按做稿人查询"],
             default: '按工单号查询'
           }
        
@@ -108,6 +108,45 @@ module.exports.query=function(){
                     runDb(obj)
 	          })
 	  	  	  break; 
+	  	  	case "按客人邮件查询": 
+	  	  	  
+	          inquirer.prompt([{
+		            type: 'input',
+		            name: 'type',
+		            message: `${chalk.magenta(' 请输入邮箱关键字(忽略大小写,如：@salesmarketingservices.com):')}`
+	          },])
+	          .then(answers=>{
+	                // console.log("type",answers.type)
+                    obj={contact: {$regex: answers.type, $options: '$i'}}
+                    runDb(obj)
+	          })
+	  	  	  break; 
+	  	  	case "按做稿时间查询": 
+	  	  	  
+	          inquirer.prompt([{
+		            type: 'input',
+		            name: 'type',
+		            message: `${chalk.magenta(' 请输入模糊日期(如2019，03/):')}`
+	          },])
+	          .then(answers=>{
+	                // console.log("type",answers.type)
+                    obj={create_time: {$regex: answers.type, $options: '$i'}}
+                    runDb(obj)
+	          })
+	  	  	  break;   
+	  	  	case "按做稿人查询": 
+	  	  	  
+	          inquirer.prompt([{
+		            type: 'input',
+		            name: 'type',
+		            message: `${chalk.magenta(' 请输入做稿人(如simon,scott):')}`
+	          },])
+	          .then(answers=>{
+	                // console.log("type",answers.type)
+                    obj={author: {$regex: answers.type, $options: '$i'}}
+                    runDb(obj)
+	          })
+	  	  	  break;     
 	  	  }	  	  
 
 	  })           
