@@ -25,11 +25,8 @@ mongod --config /usr/local/etc/mongod.conf
 ```
 caseinfo
 ```
-
-#### mongoose使用总结
-- 同样的表，Schema结构必须相同才可以访问，这里踩了一坑，就多了一个字段，折腾了几个小时，建议封装Schema
-
-
 ### 效果展示
 ![](./imgs/1.png)
 
+#### mongoose使用总结
+- 同样的表，Schema结构必须相同才可以访问，这里踩了一坑，就多了一个字段，折腾了几个小时，建议封装Schema
