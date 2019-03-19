@@ -39,7 +39,7 @@ function readDir(path){
                         
                         // var newPath = parsePath(path)+'/'+ele;
                         var newPath = path+'/'+ele;
-                        console.log(newPath)
+                        // console.log(newPath)
                         //save path into database
                         
                         var newJobPath = new JobPathModel({
@@ -50,7 +50,7 @@ function readDir(path){
                            })
                            newJobPath.save(function(err,docs){
                              if (err) {console.log('err')}
-                              console.log(docs) // 
+                              // console.log(docs) // 
                               // mongoose.connection.close(); //位置不对，2500多天只有6条数据进去了
                            })
                         

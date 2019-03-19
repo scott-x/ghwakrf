@@ -65,7 +65,7 @@ module.exports={
      
                newJob.save((err,docs)=>{
                    if (err) {console.log(err)}
-                      console.log(docs)   
+                      // console.log(docs)   
                       mongoose.connection.close();  
                })
           })

@@ -10,8 +10,7 @@ module.exports={
 	removeData: function(){
 		JobPathModel.remove({},function(err,result){
 			  if (err) return handleError(err);
-		      console.log(result);
-		      console.log("  删除完毕")
+		      console.log("  删除完毕, 共删除 "+result.n+" 条数据")
 		      mongoose.connection.close(); 
 		})
 	}
