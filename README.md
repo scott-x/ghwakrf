@@ -5,7 +5,7 @@
 4. query data
 
 
-### useage
+### useage for MacOS
 #### option 1
 ```
 npm install ghwakrf -g  
