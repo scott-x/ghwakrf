@@ -1,6 +1,6 @@
 {
   "name": "ghwakrf",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "1. parse excel, get the obj data 2. get the args: `excel path` 3. store the data(path) into mongodb 4. query data",
   "bin": {
     "caseinfo": "./bin/v1/index.js"
