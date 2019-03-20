@@ -75,7 +75,7 @@ module.exports.query=function(){
             type: 'rawlist',
             name: 'query',
             message: `${chalk.magenta(' 选择你的查询方式:')}`,
-            choices: ['按工单号查询',"按系列,国家查询","按客人邮件查询","按做稿时间查询","按做稿人查询"],
+            choices: ['按工单号查询',"按系列,国家查询","按客人邮件查询","按做稿时间查询","按做稿人查询","按buyer、部门查询"],
             default: '按工单号查询'
           }
        
@@ -146,7 +146,20 @@ module.exports.query=function(){
                     obj={author: {$regex: answers.type, $options: '$i'}}
                     runDb(obj)
 	          })
-	  	  	  break;     
+	  	  	  break;   
+	  	  	case "按buyer、部门查询": 
+	  	  	  
+	          inquirer.prompt([{
+		            type: 'input',
+		            name: 'type',
+		            message: `${chalk.magenta(' 请输入buyer或部门关键字(如kristen,18):')}`
+	          },])
+	          .then(answers=>{
+	                // console.log("type",answers.type)
+                    obj={buyer: {$regex: answers.type, $options: '$i'}}
+                    runDb(obj)
+	          })
+	  	  	  break;         
 	  	  }	  	  
 
 	  })           
