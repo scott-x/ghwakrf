@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var jobPathSchema = new Schema({ job_number: String,path:String,create_time:Date});
 var JobPathModel = mongoose.model('benchmark_job_path', jobPathSchema); //创建blog数据库
 mongoose.connect('mongodb://localhost:27017/benchmark_job_path',{ useNewUrlParser: true } );
-const { exec_cmd } = require('slimz');
+const { exec_cmd,exists } = require('slimz');
 
 function task(){
 	inquirer
@@ -30,10 +30,17 @@ function task(){
 }
 
 async function open(job){
-	let result= await find(JobPathModel,{path: {$regex: job, $options: '$i'}},-1)
-	let index= result[0].path.lastIndexOf('/')
-	let newPath = result[0].path.substring(0,(index-3))+"\\"+' 做稿'
-	exec_cmd("open "+newPath.trim(),()=>{})
+	let flag = await exists(job)
+	if (flag) {
+		let result = await find(JobPathModel,{path: {$regex: job, $options: '$i'}},-1)
+		let index = result[0].path.lastIndexOf('/')
+		let newPath = result[0].path.substring(0,(index-3))+"\\"+' 做稿'
+		exec_cmd("open "+newPath.trim(),()=>{})
+	}else{
+		mongoose.connection.close()
+		console.log("   未发现目标")
+	}
+	
 }
 
 function find(Model,query_obj,sort){
